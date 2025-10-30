@@ -1,0 +1,207 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+    --primary: #FFB823;
+    --primary-dark: #e6a61f;
+    --secondary: #0A400C;
+    --background: #FFFFFF;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --border: #e5e5e5;
+}
+
+body {
+    font-family: 'Figtree', sans-serif;
+    background-color: var(--background);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.btn-primary {
+    @apply bg-[#FFB823] hover:bg-[#e6a61f] text-[#0A400C] font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg border-2 border-transparent hover:border-[#0A400C]/10;
+}
+
+.btn-secondary {
+    @apply bg-[#0A400C] hover:bg-[#083009] text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+}
+
+.btn-outline {
+    @apply border-2 border-[#0A400C] text-[#0A400C] hover:bg-[#0A400C] hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300;
+}
+
+.card-modern {
+    @apply bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 border border-gray-100 overflow-hidden;
+}
+
+.card-modern-hover {
+    @apply hover:shadow-2xl hover:border-[#FFB823]/20;
+}
+
+/* nav */
+.nav-gradient {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* hero */
+.hero-gradient {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFFBEB 50%, #F0FDF4 100%);
+}
+
+/* badges */
+.badge-primary {
+    @apply bg-[#FFB823] text-[#0A400C] px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.badge-secondary {
+    @apply bg-[#0A400C] text-white px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.input-modern {
+    @apply w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#FFB823] focus:border-transparent transition-all duration-300 bg-white/80 backdrop-blur-sm;
+}
+
+/* animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* loading spinner */
+.spinner {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #FFB823;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* gradient text */
+.text-gradient {
+    background: linear-gradient(135deg, #FFB823 0%, #0A400C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* shadows */
+.shadow-soft {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* hovering */
+.hover-lift {
+    transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card {
+    @apply card-modern p-8 text-center group hover-lift relative overflow-hidden;
+}
+
+.feature-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-[#FFB823]/5 to-[#0A400C]/5 opacity-0 transition-opacity duration-300;
+}
+
+.feature-card:hover::before {
+    @apply opacity-100;
+}
+
+/* Stats cards */
+.stat-card {
+    @apply bg-gradient-to-br from-white to-gray-50/50 border border-[#FFB823]/20 rounded-2xl p-6 text-center backdrop-blur-sm;
+}
+
+/* Process steps */
+.process-step {
+    @apply flex items-start space-x-4 p-6 rounded-2xl bg-gradient-to-r from-white to-[#FFB823]/5 border border-[#0A400C]/10;
+}
+
+.process-number {
+    @apply w-12 h-12 bg-gradient-to-br from-[#FFB823] to-[#0A400C] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0;
+}
+
+/* Testimonial cards */
+.testimonial-card {
+    @apply card-modern p-6 relative;
+}
+
+.testimonial-card::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFB823] to-[#0A400C] transform scale-x-0 transition-transform duration-300;
+}
+
+.testimonial-card:hover::after {
+    @apply scale-x-100;
+}
+
+/* Category badges */
+.category-badge {
+    @apply inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-[#FFB823]/10 text-[#0A400C] border border-[#FFB823]/20 text-sm font-medium;
+}
+
+/* Progress bars */
+.progress-bar {
+    @apply w-full bg-gray-200 rounded-full h-2 overflow-hidden;
+}
+
+.progress-fill {
+    @apply h-full bg-gradient-to-r from-[#FFB823] to-[#0A400C] rounded-full transition-all duration-500;
+}
+
+/* Pricing cards */
+.pricing-card {
+    @apply card-modern p-8 text-center relative overflow-hidden;
+}
+
+.pricing-card.popular {
+    @apply border-2 border-[#FFB823] shadow-lg;
+}
+
+.pricing-badge {
+    @apply absolute top-4 right-4 bg-[#FFB823] text-[#0A400C] px-3 py-1 rounded-full text-sm font-bold;
+}
+
+/* Timeline */
+.timeline-item {
+    @apply relative pl-8 pb-8 border-l-2 border-[#FFB823]/30;
+}
+
+.timeline-dot {
+    @apply absolute left-0 w-4 h-4 bg-[#FFB823] border-4 border-white rounded-full transform -translate-x-1/2;
+}
+
+/* Gradient backgrounds */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #FFB823 0%, #0A400C 100%);
+}
+
+.bg-gradient-secondary {
+    background: linear-gradient(135deg, #0A400C 0%, #FFB823 100%);
+}
+
+.bg-gradient-light {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFFBEB 50%, #F0FDF4 100%);
+}
