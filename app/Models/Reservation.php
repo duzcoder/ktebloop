@@ -11,9 +11,17 @@ class Reservation extends Model
 
     protected $fillable = [
         'book_id',
-        'user_id',
+        'user_id', 
+        'owner_id',
         'status',
         'message',
+        'accepted_at',
+        'completed_at'
+    ];
+
+    protected $casts = [
+        'accepted_at' => 'datetime',
+        'completed_at' => 'datetime',
     ];
 
     public function book()
@@ -24,5 +32,10 @@ class Reservation extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
     }
 }

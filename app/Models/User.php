@@ -16,6 +16,7 @@ class User extends Authenticatable
         'password',
         'phone',
         'photo',
+        'role' 
     ];
 
     protected $hidden = [
@@ -31,7 +32,16 @@ class User extends Authenticatable
         ];
     }
 
-    // Relations
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isUser()
+    {
+        return $this->role === 'user';
+    }
+
     public function books()
     {
         return $this->hasMany(Book::class);
@@ -40,5 +50,10 @@ class User extends Authenticatable
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    public function receivedReservations()
+    {
+        return $this->hasMany(Reservation::class, 'owner_id');
     }
 }

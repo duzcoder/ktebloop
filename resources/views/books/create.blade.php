@@ -19,12 +19,6 @@
         margin-bottom: 1rem;
     }
 
-    .text-gradient {
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
     .dashboard-layout {
         display: grid;
         grid-template-columns: 1fr 3fr;
@@ -69,7 +63,7 @@
     }
 
     /* Form Styles */
-    .profile-form-container {
+    .book-form-container {
         background: var(--white);
         border-radius: var(--radius-lg);
         padding: 2.5rem;
@@ -163,44 +157,6 @@
         color: #e53e3e;
     }
 
-    /* Avatar Styles */
-    .avatar-section {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-    }
-
-    .avatar-preview {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--white);
-        font-size: 2.5rem;
-        font-weight: 600;
-        box-shadow: var(--shadow);
-        overflow: hidden;
-    }
-
-    .avatar-preview img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .avatar-upload {
-        flex: 1;
-    }
-
-    .avatar-actions {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1rem;
-    }
-
     /* Button Styles */
     .btn {
         display: inline-flex;
@@ -239,16 +195,6 @@
         transform: translateY(-2px);
     }
 
-    .btn-secondary {
-        background: var(--gray-200);
-        color: var(--gray-700);
-    }
-
-    .btn-secondary:hover {
-        background: var(--gray-300);
-        transform: translateY(-2px);
-    }
-
     .btn-full {
         width: 100%;
     }
@@ -260,62 +206,33 @@
         margin-top: 2rem;
     }
 
-    /* Alert Styles */
-    .alert {
-        padding: 1rem 1.5rem;
+    /* Image Preview */
+    .image-preview {
+        width: 200px;
+        height: 200px;
+        border: 2px dashed var(--gray-300);
         border-radius: var(--radius);
-        margin-bottom: 2rem;
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        justify-content: center;
+        margin-top: 1rem;
+        overflow: hidden;
     }
 
-    .alert-success {
-        background-color: #D1FAE5;
-        color: #065F46;
-        border: 1px solid #A7F3D0;
+    .image-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
-    .alert-error {
-        background-color: #FEE2E2;
-        color: #991B1B;
-        border: 1px solid #FECACA;
+    .image-preview-placeholder {
+        text-align: center;
+        color: var(--gray-400);
     }
 
-    /* Navigation Links */
-    .nav-link {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 0.75rem 1rem;
-        border-radius: var(--radius);
-        color: var(--gray-700);
-        text-decoration: none;
-        transition: all 0.3s ease;
+    .image-preview-placeholder i {
+        font-size: 3rem;
         margin-bottom: 0.5rem;
-    }
-
-    .nav-link:hover, .nav-link.active {
-        background: var(--primary-light);
-        color: var(--secondary);
-    }
-
-    .nav-link.active {
-        font-weight: 600;
-    }
-
-    /* Stats */
-    .stat-item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0.75rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 1px solid var(--gray-200);
-    }
-
-    .stat-item:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
     }
 
     /* Responsive */
@@ -338,13 +255,8 @@
             padding: 1rem;
         }
         
-        .profile-form-container {
+        .book-form-container {
             padding: 1.5rem;
-        }
-        
-        .avatar-section {
-            flex-direction: column;
-            align-items: flex-start;
         }
         
         .form-actions {
@@ -355,14 +267,14 @@
 
 <div class="dashboard-container">
     <div class="dashboard-header">
-        <h1 class="welcome-message text-gradient">Modifier le Profil 👤</h1>
-        <p class="text-lg text-gray-600">Mettez à jour vos informations personnelles</p>
+        <h1 class="welcome-message text-gradient">Ajouter un Livre 📖</h1>
+        <p class="text-lg text-gray-600">Partagez un nouveau livre avec la communauté Ktebloop</p>
     </div>
 
-    @if(session('status') === 'profile-updated')
+    @if(session('success'))
         <div class="alert alert-success">
             <i class="fas fa-check-circle"></i>
-            Votre profil a été mis à jour avec succès !
+            {{ session('success') }}
         </div>
     @endif
 
@@ -372,26 +284,26 @@
             <div class="sidebar-section">
                 <h3 class="sidebar-title">
                     <div class="sidebar-icon">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-book"></i>
                     </div>
                     Navigation
                 </h3>
                 <div class="navigation-links">
-                    <a href="{{ route('dashboard') }}" class="nav-link">
-                        <i class="fas fa-home"></i>
+                    <a href="{{ route('dashboard') }}" class="btn btn-outline btn-full" style="margin-bottom: 1rem; justify-content: flex-start;">
+                        <i class="fas fa-home mr-2"></i>
                         Tableau de bord
                     </a>
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-book"></i>
+                    <a href="{{ route('my-books') }}" class="btn btn-outline btn-full" style="margin-bottom: 1rem; justify-content: flex-start;">
+                        <i class="fas fa-book-open mr-2"></i>
                         Mes livres
                     </a>
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-handshake"></i>
+                    <a href="{{ route('my-reservations') }}" class="btn btn-outline btn-full" style="margin-bottom: 1rem; justify-content: flex-start;">
+                        <i class="fas fa-handshake mr-2"></i>
                         Mes réservations
                     </a>
-                    <a href="{{ route('profile.edit') }}" class="nav-link active">
-                        <i class="fas fa-user-edit"></i>
-                        Modifier le profil
+                    <a href="{{ route('books.create') }}" class="btn btn-primary btn-full" style="justify-content: flex-start;">
+                        <i class="fas fa-plus mr-2"></i>
+                        Ajouter un livre
                     </a>
                 </div>
             </div>
@@ -399,80 +311,93 @@
             <div class="sidebar-section">
                 <h3 class="sidebar-title">
                     <div class="sidebar-icon">
-                        <i class="fas fa-chart-bar"></i>
+                        <i class="fas fa-lightbulb"></i>
                     </div>
-                    Statistiques
+                    Conseils
                 </h3>
-                <div class="stats">
-                    <div class="stat-item">
-                        <span>Livres partagés:</span>
-                        <strong>{{ auth()->user()->books->count() }}</strong>
-                    </div>
-                    <div class="stat-item">
-                        <span>Livres empruntés:</span>
-                        <strong>{{ auth()->user()->reservations->count() }}</strong>
-                    </div>
-                    <div class="stat-item">
-                        <span>Membre depuis:</span>
-                        <strong>{{ auth()->user()->created_at->format('Y') }}</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">
-                    <div class="sidebar-icon">
-                        <i class="fas fa-cog"></i>
-                    </div>
-                    Paramètres
-                </h3>
-                <div class="settings-links">
-                    <a href="{{ route('profile.edit') }}" class="btn btn-outline btn-full" style="margin-bottom: 1rem;">
-                        <i class="fas fa-user-edit mr-2"></i>
-                        Profil
-                    </a>
+                <div class="tips">
+                    <p class="text-sm text-gray-600 mb-2">📚 Choisissez une catégorie précise</p>
+                    <p class="text-sm text-gray-600 mb-2">🖼️ Ajoutez une image de qualité</p>
+                    <p class="text-sm text-gray-600 mb-2">✍️ Rédigez une description claire</p>
+                    <p class="text-sm text-gray-600">🔍 Vérifiez les informations avant de publier</p>
                 </div>
             </div>
         </div>
 
         <div class="main-content">
-            <div class="profile-form-container">
-                <form method="POST" action="{{ route('profile.update') }}">
+            <div class="book-form-container">
+                <form method="POST" action="{{ route('books.store') }}" enctype="multipart/form-data">
                     @csrf
-                    @method('PATCH')
 
                     <div class="form-section">
                         <h2 class="form-title">
                             <div class="form-title-icon">
-                                <i class="fas fa-id-card"></i>
+                                <i class="fas fa-info-circle"></i>
                             </div>
-                            Informations personnelles
+                            Informations du livre
                         </h2>
                         
                         <div class="form-grid">
                             <div class="form-group full-width">
-                                <label class="form-label" for="name">Nom complet</label>
-                                <input type="text" id="name" name="name" class="form-input" value="{{ old('name', $user->name) }}" required>
-                                @error('name')
+                                <label class="form-label" for="title">Titre du livre *</label>
+                                <input type="text" id="title" name="title" class="form-input" value="{{ old('title') }}" required>
+                                @error('title')
                                     <span class="form-error">{{ $message }}</span>
                                 @enderror
                             </div>
                             
                             <div class="form-group">
-                                <label class="form-label" for="email">Adresse e-mail</label>
-                                <input type="email" id="email" name="email" class="form-input" value="{{ old('email', $user->email) }}" required>
-                                @error('email')
+                                <label class="form-label" for="category">Catégorie *</label>
+                                <select id="category" name="category" class="form-select" required>
+                                    <option value="">Choisir une catégorie</option>
+                                    <option value="Roman" {{ old('category') == 'Roman' ? 'selected' : '' }}>Roman</option>
+                                    <option value="Science-Fiction" {{ old('category') == 'Science-Fiction' ? 'selected' : '' }}>Science-Fiction</option>
+                                    <option value="Fantasy" {{ old('category') == 'Fantasy' ? 'selected' : '' }}>Fantasy</option>
+                                    <option value="Mystère" {{ old('category') == 'Mystère' ? 'selected' : '' }}>Mystère</option>
+                                    <option value="Biographie" {{ old('category') == 'Biographie' ? 'selected' : '' }}>Biographie</option>
+                                    <option value="Histoire" {{ old('category') == 'Histoire' ? 'selected' : '' }}>Histoire</option>
+                                    <option value="Développement personnel" {{ old('category') == 'Développement personnel' ? 'selected' : '' }}>Développement personnel</option>
+                                    <option value="Cuisine" {{ old('category') == 'Cuisine' ? 'selected' : '' }}>Cuisine</option>
+                                    <option value="Voyage" {{ old('category') == 'Voyage' ? 'selected' : '' }}>Voyage</option>
+                                </select>
+                                @error('category')
                                     <span class="form-error">{{ $message }}</span>
                                 @enderror
-                                <span class="form-help">Nous ne partagerons jamais votre e-mail.</span>
                             </div>
                             
-                            <div class="form-group">
-                                <label class="form-label" for="phone">Téléphone</label>
-                                <input type="tel" id="phone" name="phone" class="form-input" value="{{ old('phone', $user->phone) }}">
-                                @error('phone')
+                            <div class="form-group full-width">
+                                <label class="form-label" for="description">Description *</label>
+                                <textarea id="description" name="description" class="form-textarea" placeholder="Décrivez le livre, son état, son contenu..." required>{{ old('description') }}</textarea>
+                                @error('description')
                                     <span class="form-error">{{ $message }}</span>
                                 @enderror
+                                <span class="form-help">Décrivez l'état du livre et son contenu pour aider les autres membres.</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Image -->
+                    <div class="form-section">
+                        <h2 class="form-title">
+                            <div class="form-title-icon">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            Image du livre
+                        </h2>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="image">Image du livre</label>
+                            <input type="file" id="image" name="image" class="form-input" accept="image/*">
+                            @error('image')
+                                <span class="form-error">{{ $message }}</span>
+                            @enderror
+                            <span class="form-help">Formats acceptés: JPG, PNG, GIF. Taille max: 2MB.</span>
+                        </div>
+                        
+                        <div class="image-preview" id="imagePreview">
+                            <div class="image-preview-placeholder">
+                                <i class="fas fa-book"></i>
+                                <p>Aperçu de l'image</p>
                             </div>
                         </div>
                     </div>
@@ -483,8 +408,8 @@
                             Annuler
                         </a>
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save mr-2"></i>
-                            Enregistrer les modifications
+                            <i class="fas fa-plus mr-2"></i>
+                            Ajouter le livre
                         </button>
                     </div>
                 </form>
@@ -495,22 +420,21 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const photoInput = document.getElementById('photo');
-        const avatarPreview = document.getElementById('avatarPreview');
-        const originalContent = avatarPreview.innerHTML;
+        const imageInput = document.getElementById('image');
+        const imagePreview = document.getElementById('imagePreview');
 
-        photoInput.addEventListener('change', function(e) {
+        imageInput.addEventListener('change', function(e) {
             if (this.files && this.files[0]) {
                 const reader = new FileReader();
                 
                 reader.onload = function(e) {
-                    avatarPreview.innerHTML = '';
+                    imagePreview.innerHTML = '';
                     const img = document.createElement('img');
                     img.src = e.target.result;
                     img.style.width = '100%';
                     img.style.height = '100%';
                     img.style.objectFit = 'cover';
-                    avatarPreview.appendChild(img);
+                    imagePreview.appendChild(img);
                 }
                 
                 reader.readAsDataURL(this.files[0]);

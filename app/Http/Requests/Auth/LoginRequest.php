@@ -5,9 +5,12 @@ namespace App\Http\Requests\Auth;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use App\Models\User;
+use Illuminate\Support\Facades\Log; // Add this import
 
 class LoginRequest extends FormRequest
 {
@@ -22,13 +25,27 @@ class LoginRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
     {
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'L\'adresse email est obligatoire.',
+            'email.email' => 'L\'adresse email doit être valide.',
+            'password.required' => 'Le mot de passe est obligatoire.',
         ];
     }
 
@@ -41,13 +58,35 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+        // Debug: Let's see what's happening
+        Log::info('Login attempt', [
+            'email' => $this->email,
+            'ip' => $this->ip()
+        ]);
 
+        $user = User::where('email', $this->email)->first();
+
+        if (!$user) {
+            Log::warning('Login failed: User not found', ['email' => $this->email]);
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => 'Aucun utilisateur trouvé avec cette adresse email.',
             ]);
         }
+
+        // Check password manually
+        if (!Hash::check($this->password, $user->password)) {
+            Log::warning('Login failed: Password incorrect', ['email' => $this->email]);
+            throw ValidationException::withMessages([
+                'email' => 'Le mot de passe est incorrect.',
+            ]);
+        }
+
+        Log::info('Credentials are correct, attempting Auth::login', ['user_id' => $user->id]);
+
+        // Manual login since Auth::attempt might be having issues
+        Auth::login($user);
+
+        Log::info('Manual login successful', ['user_id' => Auth::id()]);
 
         RateLimiter::clear($this->throttleKey());
     }
@@ -68,10 +107,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
+            'email' => 'Trop de tentatives de connexion. Veuillez réessayer dans '.ceil($seconds / 60).' minutes.',
         ]);
     }
 

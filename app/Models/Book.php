@@ -10,12 +10,12 @@ class Book extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
-        'image',
-        'category',
-        'status',
-        'user_id',
+        'title', 
+        'description', 
+        'category', 
+        'status', 
+        'image', 
+        'user_id'
     ];
 
     public function user()
@@ -26,5 +26,10 @@ class Book extends Model
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    public function pendingReservations()
+    {
+        return $this->reservations()->where('status', 'pending');
     }
 }

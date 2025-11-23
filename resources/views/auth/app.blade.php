@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ktebloop - Partagez vos livres gratuitement</title>
+    <title>@yield('title', 'Ktebloop - Partagez vos livres gratuitement')</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -805,10 +805,10 @@
     </style>
 </head>
 <body>
-    <!-- nav -->
+    <!-- Navigation -->
     <nav class="nav" id="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo">
+            <a href="{{ route('home') }}" class="logo">
                 <div class="logo-icon">
                     <i class="fas fa-book-open"></i>
                 </div>
@@ -816,220 +816,33 @@
             </a>
             
             <div class="nav-links">
-                <a href="#" class="nav-link">Accueil</a>
-                <a href="#features" class="nav-link">Fonctionnalités</a>
+                <a href="{{ route('home') }}" class="nav-link">Accueil</a>
+                <a href="{{ route('home') }}#features" class="nav-link">Fonctionnalités</a>
                 <a href="#" class="nav-link">À propos</a>
                 <a href="#" class="nav-link">Contact</a>
             </div>
             
             <div class="nav-actions">
-                <a href="{{ route('login') }}" class="btn btn-outline">Connexion</a>
-                <a href="{{ route('register') }}" class="btn btn-primary">S'inscrire</a>
+                @guest
+                    <a href="{{ route('login') }}" class="btn btn-outline">Connexion</a>
+                    <a href="{{ route('register') }}" class="btn btn-primary">S'inscrire</a>
+                @else
+                    <a href="{{ route('dashboard') }}" class="btn btn-primary">Tableau de bord</a>
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="btn btn-outline">Déconnexion</button>
+                    </form>
+                @endguest
             </div>
         </div>
     </nav>
 
-    <!-- hero -->
-    <section class="hero section-py">
-        <div class="container hero-container">
-            <div class="hero-content fade-in">
-                <div class="hero-badge">
-                    <i class="fas fa-recycle"></i>
-                    <span>Économie circulaire</span>
-                </div>
-                
-                <h1 class="hero-title">
-                    Donnez une seconde vie
-                    <span class="text-gradient">à vos livres</span>
-                </h1>
-                
-                <p class="hero-description">
-                    Ktebloop connecte les amateurs de livres pour partager, échanger et découvrir 
-                    de nouvelles lectures gratuitement. Rejoignez notre communauté écoresponsable.
-                </p>
+    <!-- Main Content -->
+    <main>
+        @yield('content')
+    </main>
 
-                <div class="hero-actions">
-                    <a href="#" class="btn btn-primary">
-                        <i class="fas fa-rocket"></i>
-                        <span>Commencer gratuitement</span>
-                    </a>
-                    <a href="#features" class="btn btn-outline">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Découvrir</span>
-                    </a>
-                </div>
-
-                <div class="hero-stats">
-                    <div class="stat">
-                        <div class="stat-value">500+</div>
-                        <div class="stat-label">Livres partagés</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">200+</div>
-                        <div class="stat-label">Membres actifs</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">100%</div>
-                        <div class="stat-label">Gratuit</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-visual fade-in delay-1">
-                <div class="floating-card">
-                    <div class="feature-grid">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <h3 class="feature-title">Publier</h3>
-                            <p class="feature-description">Partagez vos livres</p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-search"></i>
-                            </div>
-                            <h3 class="feature-title">Découvrir</h3>
-                            <p class="feature-description">Trouvez des livres</p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-handshake"></i>
-                            </div>
-                            <h3 class="feature-title">Échanger</h3>
-                            <p class="feature-description">Rencontrez</p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-leaf"></i>
-                            </div>
-                            <h3 class="feature-title">Recycler</h3>
-                            <p class="feature-description">Protégez la planète</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="floating-element floating-element-1"></div>
-                <div class="floating-element floating-element-2"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- features -->
-    <section id="features" class="features section-py">
-        <div class="container">
-            <div class="section-header fade-in">
-                <div class="section-badge">
-                    <i class="fas fa-star"></i>
-                    <span>Pourquoi choisir Ktebloop ?</span>
-                </div>
-                <h2 class="section-title">
-                    Une expérience de partage
-                    <span class="text-gradient">unique</span>
-                </h2>
-                <p class="section-description">
-                    Découvrez comment Ktebloop révolutionne le partage de livres avec une plateforme 
-                    simple, sécurisée et écoresponsable.
-                </p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-card-icon">
-                        <i class="fas fa-share-alt"></i>
-                    </div>
-                    <h3 class="feature-card-title">Partage Simple</h3>
-                    <p class="feature-card-description">
-                        Publiez vos livres en quelques clics. Une interface intuitive pour un partage sans effort.
-                    </p>
-                    <ul class="feature-list">
-                        <li class="feature-list-item">
-                            <i class="fas fa-check"></i>
-                            <span>Publication rapide</span>
-                        </li>
-                        <li class="feature-list-item">
-                            <i class="fas fa-check"></i>
-                            <span>Gestion facile</span>
-                        </li>
-                        <li class="feature-list-item">
-                            <i class="fas fa-check"></i>
-                            <span>Notifications en temps réel</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="feature-card fade-in delay-1">
-                    <div class="feature-card-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3 class="feature-card-title">Découverte Intelligente</h3>
-                    <p class="feature-card-description">
-                        Trouvez les livres qui vous intéressent avec notre système de recherche et filtres avancés.
-                    </p>
-                    <ul class="feature-list">
-                        <li class="feature-list-item">
-                            <i class="fas fa-check"></i>
-                            <span>Recherche par mot-clé</span>
-                        </li>
-                        <li class="feature-list-item">
-                            <i class="fas fa-check"></i>
-                            <span>Filtrage par catégorie</span>
-                        </li>
-                        <li class="feature-list-item">
-                            <i class="fas fa-check"></i>
-                            <span>Suggestions personnalisées</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="feature-card fade-in delay-2">
-                    <div class="feature-card-icon">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3 class="feature-card-title">Impact Écologique</h3>
-                    <p class="feature-card-description">
-                        Contribuez à réduire le gaspillage et préservez les ressources en donnant une seconde vie aux livres.
-                    </p>
-                    <ul class="feature-list">
-                        <li class="feature-list-item">
-                            <i class="fas fa-check"></i>
-                            <span>Réduction des déchets</span>
-                        </li>
-                        <li class="feature-list-item">
-                            <i class="fas fa-check"></i>
-                            <span>Économie circulaire</span>
-                        </li>
-                        <li class="feature-list-item">
-                            <i class="fas fa-check"></i>
-                            <span>Communauté responsable</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta section-py">
-        <div class="container cta-container">
-            <h2 class="cta-title">Prêt à rejoindre l'aventure ?</h2>
-            <p class="cta-description">
-                Rejoignez des centaines de membres qui partagent déjà leurs livres et découvrent de nouvelles lectures gratuitement.
-            </p>
-            <div class="cta-actions">
-                <a href="#" class="btn btn-cta-primary">
-                    <i class="fas fa-user-plus"></i>
-                    <span>Créer un compte gratuit</span>
-                </a>
-                <a href="#" class="btn btn-cta-outline">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <span>Se connecter</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- footer -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-container">
@@ -1060,7 +873,7 @@
                 <div>
                     <h3 class="footer-links-title">Navigation</h3>
                     <ul class="footer-links">
-                        <li><a href="#" class="footer-link">Accueil</a></li>
+                        <li><a href="{{ route('home') }}" class="footer-link">Accueil</a></li>
                         <li><a href="#" class="footer-link">À propos</a></li>
                         <li><a href="#" class="footer-link">Contact</a></li>
                     </ul>
@@ -1078,7 +891,7 @@
 
             <div class="footer-bottom">
                 <p class="footer-copyright">
-                    &copy; 2023 Ktebloop. Tous droits réservés.
+                    &copy; 2025 Ktebloop. Tous droits réservés.
                 </p>
                 <p class="footer-copyright">
                     Fait avec <i class="fas fa-heart footer-heart"></i> pour la planète
@@ -1097,25 +910,6 @@
             }
         });
 
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const fadeInOnScroll = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        fadeElements.forEach(element => {
-            element.style.opacity = 0;
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            fadeInOnScroll.observe(element);
-        });
-
-        // smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1129,5 +923,7 @@
             });
         });
     </script>
+    
+    @yield('scripts')
 </body>
 </html>

@@ -19,125 +19,968 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+
+    <style>
+        :root {
+            --primary: #FFB823;
+            --primary-light: #FFD166;
+            --primary-dark: #E6A61F;
+            --secondary: #0A400C;
+            --secondary-light: #0F5A12;
+            --secondary-dark: #083009;
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-500: #6B7280;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --radius-sm: 0.5rem;
+            --radius: 1rem;
+            --radius-lg: 1.5rem;
+            --radius-xl: 2rem;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white);
+            color: var(--gray-900);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        /* typo*/
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.875rem;
+        }
+
+        p {
+            color: var(--gray-700);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .container {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-py {
+            padding: 5rem 0;
+        }
+
+        /* navs*/
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(10, 64, 12, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .nav-scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 5rem;
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.125rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* btns*/
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--secondary);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Modernized Auth Buttons */
+        .auth-link {
+            position: relative;
+            color: var(--secondary);
+            font-weight: 600;
+            padding: 0.6rem 1.25rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: rgba(10, 64, 12, 0.05);
+            backdrop-filter: blur(8px);
+            box-shadow: inset 0 0 0 1px rgba(10, 64, 12, 0.15);
+        }
+
+        .auth-link:hover {
+            background: rgba(255, 184, 35, 0.15);
+            color: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(255, 184, 35, 0.2);
+        }
+
+        /* Modern Gradient Button */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            color: var(--secondary);
+            font-weight: 700;
+            border: none;
+            border-radius: var(--radius);
+            padding: 0.9rem 1.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            box-shadow: 0 8px 20px rgba(255, 184, 35, 0.3);
+        }
+
+        .btn-primary::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: all 0.6s;
+        }
+
+        .btn-primary:hover::after {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(255, 184, 35, 0.35);
+        }
+
+        /* Modern Outline Button */
+        .btn-outline {
+            position: relative;
+            border: 1.8px solid var(--secondary);
+            color: var(--secondary);
+            background: transparent;
+            font-weight: 600;
+            border-radius: var(--radius);
+            padding: 0.85rem 1.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .btn-outline::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--secondary-light), var(--secondary-dark));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .btn-outline:hover::before {
+            opacity: 1;
+        }
+
+        .btn-outline:hover {
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(10, 64, 12, 0.3);
+        }
+
+        .btn-outline i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-outline span,
+        .btn-outline i {
+            z-index: 1;
+        }
+
+
+        /* hero*/
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at 15% 50%, rgba(255, 184, 35, 0.1) 0%, transparent 25%),
+                        radial-gradient(circle at 85% 30%, rgba(10, 64, 12, 0.05) 0%, transparent 25%);
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 184, 35, 0.1);
+            color: var(--secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .stat-label {
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .floating-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            padding: 1.5rem;
+            position: relative;
+            transform: rotate(3deg);
+            transition: transform 0.5s ease;
+        }
+
+        .floating-card:hover {
+            transform: rotate(0);
+        }
+
+        .floating-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-xl);
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .feature-item {
+            background: var(--gray-50);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--white);
+            font-size: 1.25rem;
+        }
+
+        .feature-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element-1 {
+            width: 6rem;
+            height: 6rem;
+            background: var(--primary);
+            top: 10%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element-2 {
+            width: 4rem;
+            height: 4rem;
+            background: var(--secondary);
+            bottom: 20%;
+            left: 5%;
+            animation-delay: 2s;
+        }
+
+        /* features*/
+        .features {
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 48rem;
+            margin: 0 auto 4rem;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(10, 64, 12, 0.1);
+            color: var(--secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-description {
+            font-size: 1.25rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card-icon {
+            width: 5rem;
+            height: 5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-card-icon {
+            transform: scale(1.1);
+        }
+
+        .feature-card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .feature-card-description {
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            text-align: left;
+            list-style: none;
+        }
+
+        .feature-list-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--gray-700);
+        }
+
+        .feature-list-item i {
+            color: var(--primary);
+        }
+
+        /* CTA*/
+        .cta {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(255, 184, 35, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(255, 184, 35, 0.05) 0%, transparent 50%);
+        }
+
+        .cta-container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 48rem;
+        }
+
+        .cta-title {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-cta-primary {
+            background: var(--primary);
+            color: var(--secondary);
+        }
+
+        .btn-cta-primary:hover {
+            background: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .btn-cta-outline {
+            background: transparent;
+            color: var(--white);
+            border: 1.5px solid var(--white);
+        }
+
+        .btn-cta-outline:hover {
+            background: var(--white);
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        /* footer*/
+        .footer {
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            padding: 4rem 0;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .footer-description {
+            max-width: 24rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--secondary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .footer-links-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: var(--gray-700);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-200);
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copyright {
+            color: var(--gray-500);
+        }
+
+        .footer-heart {
+            color: var(--primary);
+        }
+
+        /*animation*/
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        /*responsiveness*/
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-actions, .cta-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .nav-actions {
+                gap: 0.5rem;
+            }
+
+            .btn, .btn-outline {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.875rem;
+            }
+
+            .auth-link {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
 </head>
+
 <body class="font-sans antialiased bg-white">
     <div class="min-h-screen flex flex-col">
         <!-- Navigation -->
-        <nav class="nav-gradient sticky top-0 z-50 backdrop-blur-lg bg-white/95">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center h-16">
-                    <!-- Logo -->
-                    <div class="flex items-center space-x-3">
-                        <a href="{{ route('home') }}" class="flex items-center space-x-3 group">
-                            <div class="w-10 h-10 bg-gradient-to-br from-[#FFB823] to-[#0A400C] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-book-open text-white text-lg"></i>
-                            </div>
-                            <span class="text-2xl font-bold bg-gradient-to-r from-[#0A400C] to-[#FFB823] bg-clip-text text-transparent">
-                                Ktebloop
-                            </span>
-                        </a>
+        <nav class="nav">
+            <div class="nav-container">
+                <!-- Logo -->
+                <a href="{{ route('home') }}" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-book-open"></i>
                     </div>
+                    <span class="logo-text">Ktebloop</span>
+                </a>
 
-                    <!-- Navigation Links -->
-                    <div class="hidden md:flex items-center space-x-8">
-                        <a href="{{ route('home') }}" class="text-[#0A400C] hover:text-[#FFB823] font-medium transition-colors duration-300 relative group">
-                            Accueil
-                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFB823] group-hover:w-full transition-all duration-300"></span>
-                        </a>
-                        @auth
-                            <a href="{{ route('dashboard') }}" class="text-[#0A400C] hover:text-[#FFB823] font-medium transition-colors duration-300 relative group">
+                <!-- Navigation Links -->
+                <div class="nav-links">
+                    @auth
+                        @if(Auth::user()->role === 'user')
+                            <a href="{{ route('dashboard') }}" class="nav-link">
                                 Tableau de bord
-                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFB823] group-hover:w-full transition-all duration-300"></span>
                             </a>
-                        @endauth
-                    </div>
+                        @endif
+                        
+                        @if(Auth::user()->role === 'admin')
+                            <a href="{{ route('admin.dashboard') }}" class="nav-link">
+                                <i class="fas fa-cog mr-2"></i>
+                                Administration
+                            </a>
+                        @endif
+                    @endauth
+                </div>
 
-                    <!-- Auth Links -->
-                    <div class="flex items-center space-x-4">
-                        @auth
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="btn-outline text-sm">
-                                    <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
-                                </button>
-                            </form>
-                        @else
-                            <a href="{{ route('login') }}" class="text-[#0A400C] hover:text-[#FFB823] font-medium transition-colors duration-300">
-                                Connexion
-                            </a>
-                            <a href="{{ route('register') }}" class="btn-primary text-sm">
-                                <i class="fas fa-user-plus mr-2"></i>S'inscrire
-                            </a>
-                        @endauth
-                    </div>
+                <!-- Auth Links -->
+                <div class="nav-actions">
+                    @auth
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="btn-outline">
+                                <i class="fas fa-sign-out-alt mr-2"></i>
+                                Déconnexion
+                            </button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="auth-link">
+                            Connexion
+                        </a>
+                        <a href="{{ route('register') }}" class="btn-primary">
+                            <i class="fas fa-user-plus mr-2"></i>S'inscrire
+                        </a>
+                    @endauth
                 </div>
             </div>
         </nav>
 
         <!-- Page Content -->
-        <main class="flex-1">
+        <main class="flex-1" style="margin-top: 5rem;">
             @yield('content')
         </main>
-
-        <!-- Footer -->
-        <footer class="bg-gradient-to-b from-white to-gray-50 border-t border-gray-100 mt-20">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <!-- Brand -->
-                    <div class="col-span-1 md:col-span-2">
-                        <div class="flex items-center space-x-3 mb-4">
-                            <div class="w-8 h-8 bg-gradient-to-br from-[#FFB823] to-[#0A400C] rounded-lg flex items-center justify-center">
-                                <i class="fas fa-book-open text-white text-sm"></i>
-                            </div>
-                            <span class="text-xl font-bold text-[#0A400C]">Ktebloop</span>
-                        </div>
-                        <p class="text-gray-600 mb-4 max-w-md">
-                            Plateforme de partage et de réutilisation de livres. 
-                            Donnez une seconde vie à vos livres et découvrez de nouvelles lectures gratuitement.
-                        </p>
-                        <div class="flex space-x-4">
-                            <a href="#" class="w-10 h-10 bg-[#0A400C] text-white rounded-full flex items-center justify-center hover:bg-[#FFB823] hover:text-[#0A400C] transition-all duration-300 transform hover:scale-110">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-[#0A400C] text-white rounded-full flex items-center justify-center hover:bg-[#FFB823] hover:text-[#0A400C] transition-all duration-300 transform hover:scale-110">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-[#0A400C] text-white rounded-full flex items-center justify-center hover:bg-[#FFB823] hover:text-[#0A400C] transition-all duration-300 transform hover:scale-110">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Links -->
-                    <div>
-                        <h3 class="font-semibold text-[#0A400C] mb-4">Navigation</h3>
-                        <ul class="space-y-2">
-                            <li><a href="{{ route('home') }}" class="text-gray-600 hover:text-[#FFB823] transition-colors duration-300">Accueil</a></li>
-                            <li><a href="#" class="text-gray-600 hover:text-[#FFB823] transition-colors duration-300">À propos</a></li>
-                            <li><a href="#" class="text-gray-600 hover:text-[#FFB823] transition-colors duration-300">Contact</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 class="font-semibold text-[#0A400C] mb-4">Légal</h3>
-                        <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-600 hover:text-[#FFB823] transition-colors duration-300">Confidentialité</a></li>
-                            <li><a href="#" class="text-gray-600 hover:text-[#FFB823] transition-colors duration-300">Conditions</a></li>
-                            <li><a href="#" class="text-gray-600 hover:text-[#FFB823] transition-colors duration-300">Mentions légales</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="border-t border-gray-200 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-600 text-sm">
-                        &copy; {{ date('Y') }} Ktebloop. Tous droits réservés.
-                    </p>
-                    <p class="text-gray-500 text-sm mt-2 md:mt-0">
-                        Fait avec <i class="fas fa-heart text-[#FFB823] mx-1"></i> pour la planète
-                    </p>
-                </div>
-            </div>
-        </footer>
     </div>
 
     <!-- Scripts -->
@@ -157,6 +1000,16 @@
             const animatedElements = document.querySelectorAll('.animate-fade-in-up');
             animatedElements.forEach((element, index) => {
                 element.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Nav scroll effect
+            const nav = document.querySelector('.nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                }
             });
         });
     </script>
