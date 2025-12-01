@@ -28,10 +28,10 @@ Join an eco-friendly community and give your books a second life! 🌱✨
 ---
 
 ## 🖥️ Technologies Used
-- **Backend:** PHP 8.x, Laravel 10
+- **Backend:** PHP 8, Laravel 10
 - **Frontend:** HTML5, CSS3, custom Tailwind-like styles
 - **Database:** MySQL / MariaDB
-- **Authentication:** Laravel Breeze / Jetstream
+- **Authentication:** Laravel Breeze
 - **Icons & Fonts:** Font Awesome, Google Fonts Inter
 
 ---
