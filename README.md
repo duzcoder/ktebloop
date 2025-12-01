@@ -3,7 +3,7 @@
 Ktebloop is a Laravel PHP web platform to share, exchange, and discover books for free.  
 Join an eco-friendly community and give your books a second life! 🌱✨
 
-![Ktebloop Demo](demo.gif)
+![Ktebloop Demo](/demo.gif)
 ---
 
 ## 🚀 Main Features
