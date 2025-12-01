@@ -49,7 +49,7 @@ Join an eco-friendly community and give your books a second life! 🌱✨
 
 ### 1. Clone the project
 ```
-git clone https://github.com/<your-username>/Ktebloop.git
+git clone https://github.com/duzcoder/Ktebloop.git
 cd Ktebloop
 ```
 ### 2. Install PHP dependencies
