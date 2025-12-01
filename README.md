@@ -1,61 +1,210 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📚 Ktebloop – Share Your Books for Free
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Ktebloop is a Laravel PHP web platform to share, exchange, and discover books for free.  
+Join an eco-friendly community and give your books a second life! 🌱✨
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Main Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 📖 Book Sharing
+- Easily publish your books
+- Intuitive interface for managing your publications
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🔍 Smart Discovery
+- Search by keywords
+- Filter by categories
+- Personalized book suggestions
 
-## Learning Laravel
+### 🤝 Exchanges & Community
+- Meet members with similar tastes
+- Exchange books locally or online
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 🌿 Eco-Friendly Impact
+- Reduce waste
+- Promote circular economy
+- Encourage reuse and sharing
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🖥️ Technologies Used
+- **Backend:** PHP 8.x, Laravel 10
+- **Frontend:** HTML5, CSS3, custom Tailwind-like styles
+- **Database:** MySQL / MariaDB
+- **Authentication:** Laravel Breeze / Jetstream
+- **Icons & Fonts:** Font Awesome, Google Fonts Inter
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🗂️ Project Structure
+ktebloop/
+├── .editorconfig
+├── .env.example
+├── .gitattributes
+├── .gitignore
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── AdminController.php
+│   │   │   ├── Auth/
+│   │   │   │   ├── AuthenticatedSessionController.php
+│   │   │   │   ├── ConfirmablePasswordController.php
+│   │   │   │   ├── EmailVerificationNotificationController.php
+│   │   │   │   ├── EmailVerificationPromptController.php
+│   │   │   │   ├── NewPasswordController.php
+│   │   │   │   ├── PasswordController.php
+│   │   │   │   ├── PasswordResetLinkController.php
+│   │   │   │   ├── RegisteredUserController.php
+│   │   │   │   └── VerifyEmailController.php
+│   │   │   ├── BookController.php
+│   │   │   ├── Controller.php
+│   │   │   ├── DashboardController.php
+│   │   │   ├── HomeController.php
+│   │   │   ├── ProfileController.php
+│   │   │   └── ReservationController.php
+│   │   └── Requests/
+│   │       ├── Auth/
+│   │       │   └── LoginRequest.php
+│   │       └── ProfileUpdateRequest.php
+│   ├── Models/
+│   │   ├── Book.php
+│   │   ├── Reservation.php
+│   │   └── User.php
+│   ├── Providers/
+│   │   └── AppServiceProvider.php
+│   └── View/
+│       └── Components/
+│           ├── AppLayout.php
+│           └── GuestLayout.php
+├── artisan
+├── bootstrap/
+│   ├── app.php
+│   ├── cache/
+│   └── providers.php
+├── composer.json
+├── composer.lock
+├── config/
+├── database/
+│   ├── .gitignore
+│   ├── factories/
+│   ├── migrations/
+│   └── seeders/
+│       ├── BookSeeder.php
+│       ├── DatabaseSeeder.php
+│       └── UserSeeder.php
+├── LICENSE
+├── package-lock.json
+├── package.json
+├── phpunit.xml
+├── postcss.config.js
+├── public/
+│   ├── .htaccess
+│   ├── favicon.ico
+│   ├── index.php
+│   └── robots.txt
+├── README.md
+├── resources/
+│   ├── css/
+│   │   └── app.css
+│   ├── js/
+│   │   ├── app.js
+│   │   └── bootstrap.js
+│   └── views/
+│       ├── admin/
+│       │   ├── books.blade.php
+│       │   ├── create-user.blade.php
+│       │   ├── dashboard.blade.php
+│       │   ├── edit-user.blade.php
+│       │   └── users.blade.php
+│       ├── auth/
+│       │   ├── app.blade.php
+│       │   ├── confirm-password.blade.php
+│       │   ├── forgot-password.blade.php
+│       │   ├── login.blade.php
+│       │   ├── register.blade.php
+│       │   ├── reset-password.blade.php
+│       │   └── verify-email.blade.php
+│       ├── book-reservations.blade.php
+│       ├── books/
+│       │   ├── create.blade.php
+│       │   ├── edit.blade.php
+│       │   ├── index.blade.php
+│       │   └── show.blade.php
+│       ├── components/
+│       │   ├── application-logo.blade.php
+│       │   ├── auth-session-status.blade.php
+│       │   ├── danger-button.blade.php
+│       │   ├── dropdown-link.blade.php
+│       │   ├── dropdown.blade.php
+│       │   ├── input-error.blade.php
+│       │   ├── input-label.blade.php
+│       │   ├── modal.blade.php
+│       │   ├── nav-link.blade.php
+│       │   ├── primary-button.blade.php
+│       │   ├── responsive-nav-link.blade.php
+│       │   ├── secondary-button.blade.php
+│       │   └── text-input.blade.php
+│       ├── dashboard.blade.php
+│       ├── home.blade.php
+│       ├── layouts/
+│       │   ├── app.blade.php
+│       │   ├── guest.blade.php
+│       │   └── navigation.blade.php
+│       ├── my-books.blade.php
+│       ├── my-reservations.blade.php
+│       ├── profile/
+│       │   ├── edit.blade.php
+│       │   └── partials/
+│       │       ├── delete-user-form.blade.php
+│       │       ├── update-password-form.blade.php
+│       │       └── update-profile-information-form.blade.php
+│       └── welcome.blade.php
+├── routes/
+│   ├── auth.php
+│   ├── console.php
+│   └── web.php
+├── storage/
+├── tailwind.config.js
+├── tests/
+└── vite.config.js
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## 🎨 Design & UX
+- Interactive hero section with badge and stats
+- Floating cards for main features
+- Responsive design for mobile, tablet, and desktop
+- Animations: fade-in, floating elements, hover effects
+- Color palette: eco-friendly 🌿 (yellow, green, white)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## ⚡ Installation & Running
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 1. Clone the project
+```
+git clone https://github.com/<your-username>/Ktebloop.git
+cd Ktebloop
+```
+### 2. Install PHP dependencies
+```
+composer install
+```
+### 3. Configure environment
+```
+cp .env.example .env
+php artisan key:generate
+```
+Edit .env to configure your database.
+### 4. Run migrations
+```
+php artisan migrate
+```
+### 5. Start the server
+```
+php artisan serve
+```
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 5. Start the server
+Open http://127.0.0.1:8000 in your browser
